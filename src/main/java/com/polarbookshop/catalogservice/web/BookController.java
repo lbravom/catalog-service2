@@ -4,6 +4,7 @@ import com.polarbookshop.catalogservice.domain.Book;
 import com.polarbookshop.catalogservice.domain.BookService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.StreamingHttpOutputMessage;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -28,7 +29,7 @@ public class BookController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Book post(@RequestBody Book book){
+    public Book post(@Validated @RequestBody Book book){
         return bookService.addBookToCatalog(book);
     }
 
@@ -39,7 +40,7 @@ public class BookController {
     }
 
     @PutMapping("{isbn}")
-    public Book put(@PathVariable String isbn, @RequestBody Book book){
+    public Book put(@PathVariable String isbn,@Validated @RequestBody Book book){
         return bookService.editBookDetails(isbn,book);
     }
 
